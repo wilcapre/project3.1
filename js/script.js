@@ -126,11 +126,9 @@ document.getElementById("payment options").addEventListener("change", function()
 //email, Credit Card= 13 and 16 digits., Zip=5-digit and  CVV=3 digits long.
 
 var jquery=$;
-$.payment.validateCardNumber('4242 4242 4242 4242'); //=> true
-$.payment.validateCardCVC('123', 'amex'); //=> false
-$.payment.validateZip('05', 'numeric'); //=> true
-
-//$.payment.cardType('4242 4242 4242 4242'); //=> 'visa'
+$.payment.validateCardNumber('4242 4242 4242 4242'); 
+$.payment.validateCardCVC('123', 'amex'); 
+$.payment.validateZip('05', 'numeric'); 
 
 
 $(function() {
