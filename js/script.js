@@ -6,13 +6,13 @@ FSJS project 3 - Interaction Form
 //When the page loads, the first text field needs be in focus.
 
 loads = function (){
-document.getElementById("page").focus();
+document.getElementById("name").focus();
 }
 //Include a text field that will be revealed when the "Other"
 // option is selected from the "Job Role" drop down menu.
 
 
-var jobRoleSelect = document.getElementById('other-title');
+//var jobRoleSelect = document.getElementById('other-title');
 
 document.getElementById("other-title").addEventListener("change", function(){
 	var infoSection = document.querySelector('.basics');
@@ -23,13 +23,13 @@ document.getElementById("other-title").addEventListener("change", function(){
 
     textField.attribute('id', 'other-title');
 	textField.attribute('type', 'text');
-	textField.attribute('name', 'fields');
-	textField.attribute('placeholder', 'Your Job Role');
+	textField.attribute('name', 'jod_role_other');
+	textField.attribute('placeholder', 'Other');
 
 	infoSection.appendChild(textField);
 
     }
-    if(jobSelected !== 'other'){
+    if(jobSelected !== 'Other'){
 		if(document.getElementById("other-title")) {
 			infoSection.removeChild(document.getElementById("other-title"));
 		}
@@ -48,6 +48,7 @@ var iHeartJs = document.getElementById("design").value;
 if (designMenu === jsPuns) {
     var onColors = document.getElementsByClassName("puns");
     onColors.style.display = 'block';
+    
     var offColors = document.getElementsByName("heart");
     offColors.style.display = 'none';
 }
@@ -122,19 +123,68 @@ document.getElementById("payment options").addEventListener("change", function()
     
 }
 
+
 // this is to create a validation errors that would exist, prevent the user from submitting the form.
 //email, Credit Card= 13 and 16 digits., Zip=5-digit and  CVV=3 digits long.
 
-var jquery=$;
-$.payment.validateCardNumber('4242 4242 4242 4242'); 
-$.payment.validateCardCVC('123', 'amex'); 
-$.payment.validateZip('05', 'numeric'); 
+// name must enter
+$('#userName').on('input', function() {
+});
+$('#userName').on('input', function() {
+	var input=$(this);
+	var name=input.val();
+	if(name){input.removeClass("invalid").addClass("valid");}
+	else{input.removeClass("valid").addClass("invalid");}
+});
+
+//  Must enter a valid emailaddress
+$('#emailAddress').on('input', function() {
+	var input=$(this);
+	var regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+	var email=regex.test(input.val());
+	if(email){input.removeClass("invalid").addClass("valid");}
+	else{input.removeClass("valid").addClass("invalid");}
+});
+
+//must make a payment, if paying with credit card,
+//Credit Card number, a Zip Code, and a 3 number CVV value 
+//before the form can be submitted.
+
+$('#paymenyOptions').on('input', function() {
+    var input=$(this);
+    var visaRegEx = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+    var mastercardRegEx = /^(?:5[1-5][0-9]{14})$/;
+    var amexpRegEx = /^(?:3[47][0-9]{13})$/;
+    var discovRegEx = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
+    var postalCodeRegex = /^([0-9]{5})(?:[-\s]*([0-9]{4}))?$/;
+    var CVV = /^[0-9]{3,4}$/;
+    var payment=input.val();
+
+    if (payment){input.removeClass("invalid").addClass("valid");
+}
+    else{input.removeClass("valid").addClass("invalid");
+}
 
 
-$(function() {
+
+// must enter a message, this can't leave blank
+//$('#contact_message').keyup(function(event) {
+//	var input=$(this);
+//	var message=$(this).val();
+//	console.log(message);
+//	if(message){input.removeClass("invalid").addClass("valid");}
+//	else{input.removeClass("valid").addClass("invalid");}	
+//});
+//var jquery=$;
+//$.payment.validateCardNumber('4242 4242 4242 4242'); 
+//$.payment.validateCardCVC('123', 'amex'); 
+//$.payment.validateZip('05', 'numeric'); 
 
 
 
+//var ccNum = document.getElementById("cc-num");
+  //  var ccNumLbl = document.getElementById("cc-numLbl");
+    //function valid_credit_card(value) {
 
 
 
