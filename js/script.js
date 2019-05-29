@@ -127,7 +127,7 @@ document.getElementById("payment options").addEventListener("change", function()
 // this is to create a validation errors that would exist, prevent the user from submitting the form.
 //email, Credit Card= 13 and 16 digits., Zip=5-digit and  CVV=3 digits long.
 
-// name must enter
+// Name must be entered can't leave it blank.
 $('#userName').on('input', function() {
 });
 $('#userName').on('input', function() {
@@ -137,7 +137,7 @@ $('#userName').on('input', function() {
 	else{input.removeClass("valid").addClass("invalid");}
 });
 
-//  Must enter a valid emailaddress
+//  Must enter a valid email address.
 $('#emailAddress').on('input', function() {
 	var input=$(this);
 	var regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -150,7 +150,7 @@ $('#emailAddress').on('input', function() {
 //Credit Card number, a Zip Code, and a 3 number CVV value 
 //before the form can be submitted.
 
-$('#paymenyOptions').on('input', function() {
+$('#paymenyOptions').on('input', function(); {
     var input=$(this);
     var visaRegEx = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
     var mastercardRegEx = /^(?:5[1-5][0-9]{14})$/;
@@ -164,35 +164,77 @@ $('#paymenyOptions').on('input', function() {
 }
     else{input.removeClass("valid").addClass("invalid");
 }
-var constraints = {
-    creditCardNumber: {
-      presence: true,
-      format: {
-        pattern: /^(34|37|4|5[1-5]).*$/,
-        message: function(value, attribute, validatorOptions, attributes, globalOptions) {
-          return validate.format("^%{num} is not a valid credit card number", {
-            num: value
-          });
+function cardnumber(inputtxt){
+
+  var cardnumbers = /^(?:3[47][0-9]{13})$/;
+
+  if(inputtxt.value.match(cardnumbers))
+     {
+      return true;
         }
-      },
-      length: function(value, attributes, attributeName, options, constraints) {
-        if (value) {
-          // Amex
-          if ((/^(34|37).*$/).test(value)) return {is: 15};
-          // Visa, Mastercard
-          if ((/^(4|5[1-5]).*$/).test(value)) return {is: 16};
-        }
-        // Unknown card, don't validate length
+    else{
+        alert("Not a valid Amercican Express credit card number!");
         return false;
-      }
-    },
-    creditCardZip: function(value, attributes, attributeName, options, constraints) {
-      if (!(/^(34|37).*$/).test(attributes.creditCardNumber)) return null;
-      return {
-        presence: {message: "is required when using AMEX"},
-        length: {is: 5}
-      };
-    }
+        }
+}
+
+function cardnumber(inputtxt){
+
+  var cardnumbers = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+  if(inputtxt.value.match(cardnumbers)){
+      return true;
+        }
+      else{
+        alert("Not a valid Visa credit card number!");
+        return false;
+        }
+}
+function cardnumber(inputtxt){
+
+  var cardnumbers = /^(?:5[1-5][0-9]{14})$/;
+  if(inputtxt.value.match(cardnumbers)){
+      return true;
+        }
+      else{
+        alert("Not a valid Mastercard number!");
+        return false;
+        }
+}
+function cardnumber(inputtxt){
+
+  var cardnumbers = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
+  if(inputtxt.value.match(cardnumbers)) {
+      return true;
+        }
+      else{
+        alert("Not a valid Discover card number!");
+        return false;
+        }
+}
+
+      //length: function(value) {
+        //if (value) {
+          // Amex
+          //if ((/^(34|37).*$/).test(value)) return {is: 15};
+          // Visa, Mastercard
+          //if ((/^(4|5[1-5]).*$/).test(value)) return {is: 16};
+        //}
+        // Unknown card, don't validate length
+       // return false;
+      //}
+    };
+    function is_usZipCode(str){
+
+        postalCodeRegex  = /^[0-9]{5}(?:-[0-9]{4})?$/;
+  
+        if (postalCodeRegex.test(str))
+          {
+            return true;
+          }
+        else
+          {
+            return false;
+          }
   };
   
   validate({creditCardNumber: "4"}, constraints);
@@ -206,7 +248,23 @@ var constraints = {
   
   validate({creditCardNumber: "340000000000000"}, constraints);
 
+  confirmButton.click(function(e) {
+    e.preventDefault();
 
+    var cardValid = $.payform.validateCardNumber(cardNumber.val());
+    var cvvValid = $.payform.validateCardCVC(CVV.val());
+
+    if(owner.val().length < 5){
+        alert("wrong name");
+    } else if (!cardValid) {
+        alert("invalide card number");
+    } else if (!cvvValid) {
+        alert("Enter valid CVV");
+    } else {
+        // Everything is correct. Add your form submission code here.
+        alert("Everything is correct");
+    }
+});
 // must enter a message, this can't leave blank
 //$('#contact_message').keyup(function(event) {
 //	var input=$(this);
