@@ -285,7 +285,7 @@ function cardnumber(inputtxt){
 });
 ***/
 
-/**
+/***
 // must enter a message, this can't leave blank
 $('#contact_message').keyup(function(event) {
 	var input=$(this);
@@ -294,6 +294,7 @@ $('#contact_message').keyup(function(event) {
 	if(message){input.removeClass("invalid").addClass("valid");}
     else{input.removeClass("valid").addClass("invalid");}	
 });
+***/
 //var jquery=$;
 //$.payment.validateCardNumber('4242 4242 4242 4242'); 
 //$.payment.validateCardCVC('123', 'amex'); 
