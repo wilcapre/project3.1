@@ -107,21 +107,21 @@ document.querySelector(".activities").addEventListener("change", function(){
 
 //This will shows payment Informations.
 
-document.getElementById("payment options").addEventListener("change", function(){
+document.getElementById("paymentOptions").addEventListener("change", function(){
 
     var creditCard = document.getElementById("creditcard");
     var paypal = document.getElementById("paypal");
     var bitcoin = document.getElementById("bitcoin");
 
 
-    if ($("#payment").list() === "credit card") {creditCard.show()}
+    if ($("#paymentOptions").list() === "credit card") {creditCard.show()}
     else creditCard.hide();
-    if ($("#payment").list() === "paypal") {paypal.show()}
+    if ($("#paymentOptions").list() === "paypal") {paypal.show()}
     else paypal.hide();
-    if ($("#payment").list() === "bitcoin") {bitcoin.show()}
+    if ($("#paymentOptions").list() === "bitcoin") {bitcoin.show()}
     else bitcoin.hide();
     
-}
+});
 
 
 // this is to create a validation errors that would exist, prevent the user from submitting the form.
@@ -164,7 +164,7 @@ function box() {
 //Credit Card number, a Zip Code, and a 3 number CVV value 
 //before the form can be submitted.
 
-$('#paymenyOptions').on('input', function() {
+$('#paymentOptions').on('input', function() {
     var input=$(this);
     var visaRegEx = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
     var mastercardRegEx = /^(?:5[1-5][0-9]{14})$/;
@@ -172,7 +172,7 @@ $('#paymenyOptions').on('input', function() {
     var discovRegEx = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
     var postalCodeRegex = /^([0-9]{5})(?:[-\s]*([0-9]{4}))?$/;
     var CVV = /^[0-9]{3,4}$/;
-    var payment=input.val();
+    var payment=input.val(); 
     if (payment){input.removeClass("invalid").addClass("valid");
 }
     else{input.removeClass("valid").addClass("invalid");
