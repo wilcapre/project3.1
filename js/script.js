@@ -137,7 +137,7 @@ $('#userName').on('input', function() {
 	else{input.removeClass("valid").addClass("invalid");}
 });
 
-//  Must enter a valid email address.
+//  Must enter a valid email address, dave@teamtreehouse.com for example.
 $('#emailAddress').on('input', function() {
 	var input=$(this);
 	var regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -146,11 +146,25 @@ $('#emailAddress').on('input', function() {
 	else{input.removeClass("valid").addClass("invalid");}
 });
 
+// Must select at least one checkbox
+function box() {
+    // Get the checkbox
+    var checkBox = document.getElementById("check");
+    // Get the output text
+    var text = document.getElementById("text");
+  
+    // If the checkbox is checked, display the output text
+    if (checkBox.checked == true){
+      text.style.display = "block";
+    } else {
+      text.style.display = "none";
+    }
+  }
 //must make a payment, if paying with credit card,
 //Credit Card number, a Zip Code, and a 3 number CVV value 
 //before the form can be submitted.
 
-$('#paymenyOptions').on('input', function(); {
+$('#paymenyOptions').on('input', function() {
     var input=$(this);
     var visaRegEx = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
     var mastercardRegEx = /^(?:5[1-5][0-9]{14})$/;
@@ -159,11 +173,11 @@ $('#paymenyOptions').on('input', function(); {
     var postalCodeRegex = /^([0-9]{5})(?:[-\s]*([0-9]{4}))?$/;
     var CVV = /^[0-9]{3,4}$/;
     var payment=input.val();
-
     if (payment){input.removeClass("invalid").addClass("valid");
 }
     else{input.removeClass("valid").addClass("invalid");
 }
+});
 function cardnumber(inputtxt){
 
   var cardnumbers = /^(?:3[47][0-9]{13})$/;
@@ -210,7 +224,7 @@ function cardnumber(inputtxt){
         alert("Not a valid Discover card number!");
         return false;
         }
-}
+
 
       //length: function(value) {
         //if (value) {
@@ -265,14 +279,16 @@ function cardnumber(inputtxt){
         alert("Everything is correct");
     }
 });
+
+
 // must enter a message, this can't leave blank
-//$('#contact_message').keyup(function(event) {
-//	var input=$(this);
-//	var message=$(this).val();
-//	console.log(message);
-//	if(message){input.removeClass("invalid").addClass("valid");}
-//	else{input.removeClass("valid").addClass("invalid");}	
-//});
+$('#contact_message').keyup(function(event) {
+	var input=$(this);
+	var message=$(this).val();
+	console.log(message);
+	if(message){input.removeClass("invalid").addClass("valid");}
+    else{input.removeClass("valid").addClass("invalid");}	
+});
 //var jquery=$;
 //$.payment.validateCardNumber('4242 4242 4242 4242'); 
 //$.payment.validateCardCVC('123', 'amex'); 
