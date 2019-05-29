@@ -105,20 +105,21 @@ document.querySelector(".activities").addEventListener("change", function(){
     }
 });
 
+
 //This will shows payment Informations.
 
-document.getElementById("paymentOptions").addEventListener("change", function(){
+document.getElementById(".paymentOptions").addEventListener("change", function(){
 
     var creditCard = document.getElementById("creditcard");
     var paypal = document.getElementById("paypal");
     var bitcoin = document.getElementById("bitcoin");
 
 
-    if ($("#paymentOptions").list() === "credit card") {creditCard.show()}
+    if ($("#payment").list() === "credit card") {creditCard.show()}
     else creditCard.hide();
-    if ($("#paymentOptions").list() === "paypal") {paypal.show()}
+    if ($("#payment").list() === "paypal") {paypal.show()}
     else paypal.hide();
-    if ($("#paymentOptions").list() === "bitcoin") {bitcoin.show()}
+    if ($("#payment").list() === "bitcoin") {bitcoin.show()}
     else bitcoin.hide();
     
 });
@@ -128,6 +129,8 @@ document.getElementById("paymentOptions").addEventListener("change", function(){
 //email, Credit Card= 13 and 16 digits., Zip=5-digit and  CVV=3 digits long.
 
 // Name must be entered can't leave it blank.
+
+/***
 $('#userName').on('input', function() {
 });
 $('#userName').on('input', function() {
@@ -237,6 +240,7 @@ function cardnumber(inputtxt){
        // return false;
       //}
     };
+
     function is_usZipCode(str){
 
         postalCodeRegex  = /^[0-9]{5}(?:-[0-9]{4})?$/;
@@ -279,8 +283,9 @@ function cardnumber(inputtxt){
         alert("Everything is correct");
     }
 });
+***/
 
-
+/**
 // must enter a message, this can't leave blank
 $('#contact_message').keyup(function(event) {
 	var input=$(this);
