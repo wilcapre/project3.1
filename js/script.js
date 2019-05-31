@@ -16,7 +16,7 @@ document.getElementById("name").focus();
 
 document.getElementById("other-title").addEventListener("change", function(){
 	var infoSection = document.querySelector('.basics');
-    var jobSelected = jobRoleSelect.value;
+    var jobSelected = jobSelect.value;
 
     if(jobSelected === 'other'){
         var textField = document.createElement('input');
@@ -71,21 +71,22 @@ document.querySelector(".activities").addEventListener("change", function(){
     var node = document.getElementById("node");
     var build = document.getElementById("build-tools");
     var npm = document.getElementById("npm");
-
+});
 //This is no longer disabled when a user unchecks an activity.
 
-    if(frameworks.checkBox == false){
-        express.unCheck = false;
-    } else if(express.checkBox == false) {
-        frameworks.unCheck = false;
-    } else if(libs.checkBox == false) {
-        node.unCheck = false;
-    } else if(node.checkBox == false) {
-        libs.unCheck = false;
-    } else if(build.checkBox == false) {
-        npm.unCheck = false;
-    } else if(npm.checkBox == false){
-        build.unCheck = false;
+   /** 
+     if(frameworks.checkbox == false) {
+        express.uncheck == false;
+    } else if(express.checkbox == false) {
+        frameworks.uncheck = false;
+    } else if(libs.checkbox == false) {
+        node.uncheck = false;
+    } else if(node.checkbox == false) {
+        libs.uncheck = false;
+    } else if(build.checkbox == false) {
+        npm.uncheck = false;
+    } else if(npm.checkbox == false){
+        build.uncheck = false;
     }
 
     //As a user selects activities, a running total should display below the list of checkboxes. 
@@ -105,6 +106,16 @@ document.querySelector(".activities").addEventListener("change", function(){
     }
 });
 
+**/ $('.checked_all').on('change', function() { 
+    $('.checkbox').prop('checked', $(this).prop("checked")); 
+});
+$('.checkbox').change(function(){
+    if($('.checkbox:checked').length == $('.checkbox').length){
+        $('.checked_all').prop('checked',true);
+    }else{
+        $('.checked_all').prop('checked',false);
+    }
+});
 
 //This will shows payment Informations.
 
@@ -188,11 +199,11 @@ function cardnumber(inputtxt){
 
   if(inputtxt.value.match(cardnumbers))
      {
-      return true;
+      return show;
         }
     else{
         alert("Not a valid Amercican Express credit card number!");
-        return false;
+        return hide;
         }
 }
 
@@ -200,33 +211,33 @@ function cardnumber(inputtxt){
 
   var cardnumbers = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
   if(inputtxt.value.match(cardnumbers)){
-      return true;
+      return show;
         }
       else{
         alert("Not a valid Visa credit card number!");
-        return false;
+        return hide;
         }
 }
 function cardnumber(inputtxt){
 
   var cardnumbers = /^(?:5[1-5][0-9]{14})$/;
   if(inputtxt.value.match(cardnumbers)){
-      return true;
+      return show;
         }
       else{
         alert("Not a valid Mastercard number!");
-        return false;
+        return hide;
         }
 }
 function cardnumber(inputtxt){
 
   var cardnumbers = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
   if(inputtxt.value.match(cardnumbers)) {
-      return true;
+      return show;
         }
       else{
         alert("Not a valid Discover card number!");
-        return false;
+        return hide;
         }
 
 
@@ -252,21 +263,25 @@ function cardnumber(inputtxt){
           }
         else
           {
-            return false;
+            return hide;
           }
   };
   
-  validate({creditCardNumber: "4"}, constraints);
+
+  //document.getElementById("card").addEventListener("validate", function () 
+ // validate({creditCardNumber: "4"}, constraints);
   // => {"creditCardNumber": ["Credit card (should be 16 characters)"]}
   
-  validate({creditCardNumber: "9999999999999999"}, constraints);
+  //validate({creditCardNumber: "9999999999999999"}, constraints);
   // => {"creditCardNumber": ["9999999999999999  not a valid credit card number"]}
   
-  validate({creditCardNumber: "4242424242424242"}, constraints);
+  //validate({creditCardNumber: "4242424242424242"}, constraints);
   // => undefined
   
-  validate({creditCardNumber: "340000000000000"}, constraints);
+  //validate({creditCardNumber: "340000000000000"}, constraints);
 
+
+  function validation(){
   confirmButton.click(function(e) {
     e.preventDefault();
 
@@ -278,13 +293,13 @@ function cardnumber(inputtxt){
     } else if (!cardValid) {
         alert("invalide card number");
     } else if (!cvvValid) {
-        alert("Enter valid CVV");
+        alert("Enter valid 3 digit CVV");
     } else {
         // Everything is correct. Add your form submission code here.
         alert("Everything is correct");
     }
 });
-
+  }
 
 /***
 // must enter a message, this can't leave blank
