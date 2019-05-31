@@ -108,20 +108,21 @@ document.querySelector(".activities").addEventListener("change", function(){
 
 //This will shows payment Informations.
 
-document.getElementById(".paymentOptions").addEventListener("change", function(){
+document.getElementById("payment").addEventListener("change", function(){
 
-    var creditCard = document.getElementById("creditcard");
+    var creditCard = document.getElementById("credit-card");
     var paypal = document.getElementById("paypal");
     var bitcoin = document.getElementById("bitcoin");
 
+//const div = ("creditCard");
 
-    if ($("#payment").list() === "credit card") {creditCard.show()}
-    else creditCard.hide();
-    if ($("#payment").list() === "paypal") {paypal.show()}
-    else paypal.hide();
-    if ($("#payment").list() === "bitcoin") {bitcoin.show()}
-    else bitcoin.hide();
-    
+    if ($("#payment").val("credit-card") === "credit-card") {creditCard.show()}
+    else $(creditCard).hide();
+    if ($("#payment").val() === "paypal") {paypal.show()}
+    else $(paypal).hide();
+    if ($("#payment").val() === "bitcoin") {bitcoin.show()}
+    else $(bitcoin).hide();
+  
 });
 
 
@@ -130,7 +131,7 @@ document.getElementById(".paymentOptions").addEventListener("change", function()
 
 // Name must be entered can't leave it blank.
 
-/***
+
 $('#userName').on('input', function() {
 });
 $('#userName').on('input', function() {
@@ -241,7 +242,7 @@ function cardnumber(inputtxt){
       //}
     };
 
-    function is_usZipCode(str){
+    function usZipCode(str){
 
         postalCodeRegex  = /^[0-9]{5}(?:-[0-9]{4})?$/;
   
@@ -283,7 +284,7 @@ function cardnumber(inputtxt){
         alert("Everything is correct");
     }
 });
-***/
+
 
 /***
 // must enter a message, this can't leave blank
