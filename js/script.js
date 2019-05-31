@@ -12,11 +12,11 @@ document.getElementById("name").focus();
 // option is selected from the "Job Role" drop down menu.
 
 
-//var jobRoleSelect = document.getElementById('other-title');
+var jobRoleSelect = document.getElementById('other-title');
 
 document.getElementById("other-title").addEventListener("change", function(){
 	var infoSection = document.querySelector('.basics');
-    var jobSelected = jobSelect.value;
+   var jobSelected = document.getElementById('other-title').value;
 
     if(jobSelected === 'other'){
         var textField = document.createElement('input');
