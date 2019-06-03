@@ -12,29 +12,42 @@ document.getElementById("name").focus();
 // option is selected from the "Job Role" drop down menu.
 
 
-var jobRoleSelect = document.getElementById('other-title');
+//var jobRoleSelect = document.getElementById('other-title');
 
-document.getElementById("other-title").addEventListener("change", function(){
-	var infoSection = document.querySelector('.basics');
-   var jobSelected = document.getElementById('other-title').value;
+//var jobRoleSelect = $('#jobRolSelect').get('other-title');
+const $otherJobInput = $('#other-title');
+//document.getElementById("other-title").addEventListener("change", function(){
+//	var infoSection = document.querySelector('.basics');
+  // var jobSelected = document.getElementById('other-title').value;
 
-    if(jobSelected === 'other'){
+  //$(document).jobRoleSelect(function(){
+      $("#title").change(function() {
+          if($(this).val() == "Other") {
+              $("#titlevalue").show();
+            }
+            else {
+                $("#titlevalue").hide();
+            }
+      });
+             $("#titlevalue").hide();
+  
+      if($(this).val() == 'other'){
         var textField = document.createElement('input');
 
     textField.attribute('id', 'other-title');
 	textField.attribute('type', 'text');
-	textField.attribute('name', 'jod_role_other');
+	textField.attribute('name', 'job_role_other');
 	textField.attribute('placeholder', 'Other');
 
 	infoSection.appendChild(textField);
 
     }
     if(jobSelected !== 'Other'){
-		if(document.getElementById("other-title")) {
+		if(document.getElementById("job_role_other")) {
 			infoSection.removeChild(document.getElementById("other-title"));
 		}
-	}
-});
+    }
+
 
 //For the T-Shirt "Color" menu, only display the color options that match 
 //the design selected in the "Design" menu.
