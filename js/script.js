@@ -31,7 +31,6 @@ const $otherJobInput = $('#other-title');
       });
              $("#titlevalue").hide();
   
-      if($(this).val() == 'other'){
       if ($(this).val() == 'other'){
         var textField = document.createElement('input');
 
