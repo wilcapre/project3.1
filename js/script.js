@@ -17,62 +17,68 @@ document.getElementById("name").focus();
 //var jobRoleSelect = $('#jobRolSelect').get('other-title');
 const $otherJobInput = $('#other-title');
 //document.getElementById("other-title").addEventListener("change", function(){
-//	var infoSection = document.querySelector('.basics');
+var infoSection = $('.basics');
   // var jobSelected = document.getElementById('other-title').value;
 
   //$(document).jobRoleSelect(function(){
+    $("#other-title").hide();
       $("#title").change(function() {
-          if($(this).val() == "Other") {
-              $("#titlevalue").show();
+          if($(this).val() == "other") {
+              $("#other-title").show();
+              
             }
             else {
-                $("#titlevalue").hide();
+                $("#other-title").hide();
+                //if(document.getElementById("job_role_other")) {
+                //    infoSection.removeChild(document.getElementById("other-title"));
+                //}
             }
       });
-             $("#titlevalue").hide();
-  
-      if ($(this).val() == 'other'){
-        var textField = document.createElement('input');
-
-    textField.attribute('id', 'other-title');
-	textField.attribute('type', 'text');
-	textField.attribute('name', 'job_role_other');
-	textField.attribute('placeholder', 'Other');
-
-	infoSection.appendChild(textField);
-
-    }
-    if(jobSelected !== 'Other'){
-		if(document.getElementById("job_role_other")) {
-			infoSection.removeChild(document.getElementById("other-title"));
-		}
-    }
-
 
 //For the T-Shirt "Color" menu, only display the color options that match 
 //the design selected in the "Design" menu.
 
-document.getElementById("design").addEventListener("color", function () {
-var designMenu = menuDesign.options[menuDesign.selectedIndex].value;
-var jsPuns = document.getElementById("design").value;
-var iHeartJs = document.getElementById("design").value;
+$("#design").change(function() {
+    if($(this).val() == "js puns") {
+        
+        $("#color").find("option[value='cornflowerblue']").show();
+        $("#color").find("option[value='darkslategrey']").show();
+        $("#color").find("option[value='gold']").show();
+
+        $("#color").find("option[value='tomato']").hide();
+        $("#color").find("option[value='steelblue']").hide();
+        $("#color").find("option[value='dimgrey']").hide();
+    } else {
+        $("#color").find("option[value='cornflowerblue']").hide();
+        $("#color").find("option[value='darkslategrey']").hide();
+        $("#color").find("option[value='gold']").hide();
+
+        $("#color").find("option[value='tomato']").show();
+        $("#color").find("option[value='steelblue']").show();
+        $("#color").find("option[value='dimgrey']").show();
+    }
+});
+
+
+// var designMenu = 
+// var jsPuns = document.getElementById("design").value;
+// var iHeartJs = document.getElementById("design").value;
 
 //whichever design has been selected, match color will be displayed, if it doesn't macth color will be hiding.
-if (designMenu === jsPuns) {
-    var onColors = document.getElementsByClassName("puns");
-    onColors.style.display = 'block';
+// if (designMenu === jsPuns) {
+//     var onColors = document.getElementsByClassName("puns");
+//     onColors.style.display = 'block';
     
-    var offColors = document.getElementsByName("heart");
-    offColors.style.display = 'none';
-}
+//     var offColors = document.getElementsByName("heart");
+//     offColors.style.display = 'none';
+// }
 
-if (designMenu === iLoveJs) {
-    var onColors = document.getElementsByClassName("heart");
-    onColors.style.display = 'block';
-    var offColors = document.getElementsByName("puns");
-    offColors.style.display = 'none';
-}
-});
+// if (designMenu === iLoveJs) {
+//     var onColors = document.getElementsByClassName("heart");
+//     onColors.style.display = 'block';
+//     var offColors = document.getElementsByName("puns");
+//     offColors.style.display = 'none';
+// }
 
 //Register for activities.
 
@@ -85,44 +91,49 @@ document.querySelector(".activities").addEventListener("change", function(){
     var build = document.getElementById("build-tools");
     var npm = document.getElementById("npm");
 });
+
+
 //This is no longer disabled when a user unchecks an activity.
 
-   /** 
-     if(frameworks.checkbox == false) {
-        express.uncheck == false;
-    } else if(express.checkbox == false) {
-        frameworks.uncheck = false;
-    } else if(libs.checkbox == false) {
-        node.uncheck = false;
-    } else if(node.checkbox == false) {
-        libs.uncheck = false;
-    } else if(build.checkbox == false) {
-        npm.uncheck = false;
-    } else if(npm.checkbox == false){
-        build.uncheck = false;
-    }
+   
 
-    //As a user selects activities, a running total should display below the list of checkboxes. 
+//As a user select activities, a running total should display below the list of checkboxes. 
 
-    if(framework.checkBox == true) {
-        express.unCheck = true;
-    } else if(express.checkBox == true) {
-        framework.unCheck=  true;
-    } else if(libs.checkBox == true) {
-        node.unCheck= true;
-    } else if(node.checkBox == true) {
-        libs.unCheck = true;
-    } else if(build.checkBox == false) {
-        npm.unCheck = false;
-    }  else if(npm.checkBox == false){
-        build.unCheck = false;
-    }
-});
-
-**/ $('.checked_all').on('change', function() { 
+$('.checked_all').on('change', function() { 
     $('.checkbox').prop('checked', $(this).prop("checked")); 
 });
-$('.checkbox').change(function(){
+
+$('.activities').change(function(){
+    var price = 0;
+    $(this).find('input:checkbox').each(function() {
+        $(this).attr('disabled', false);
+    });
+
+    $(this).find('input:checkbox').each(function() {
+        if ($(this).prop('checked')) {
+            var inputText = $(this).parent().text();
+            var index = inputText.indexOf("$");
+            price += parseInt(inputText.substring(index+1));
+
+            var startDate = inputText.indexOf("—");
+            var endDate = inputText.indexOf(",");
+            selectedDate = inputText.substring(startDate, endDate);
+
+            $('.activities').find('input:checkbox').each(function() {
+                if ($(this).parent().text().indexOf(selectedDate) != -1 
+                    && $(this).parent().text().indexOf(inputText) == -1) {
+                    $(this).attr('disabled', true);
+                }
+            });
+        }
+    });
+    $("#cost").val(price);
+    if (price > 0) {
+        $("#cost").removeClass("invalid").addClass("valid");
+    } else {
+        $("#cost").removeClass("valid").addClass("invalid");
+    }
+    
     if($('.checkbox:checked').length == $('.checkbox').length){
         $('.checked_all').prop('checked',true);
     }else{
@@ -139,9 +150,13 @@ document.getElementById("payment").addEventListener("change", function(){
     var bitcoin = document.getElementById("bitcoin");
 
 //const div = ("creditCard");
+    console.log($("#payment").val());
+    if ($("#payment").val() === "credit card") {
+        $("#credit-card").show();
+    } else {
+        $("#credit-card").hide();
+    }
 
-    if ($("#payment").val("credit-card") === "credit-card") {creditCard.show()}
-    else $(creditCard).hide();
     if ($("#payment").val() === "paypal") {paypal.show()}
     else $(paypal).hide();
     if ($("#payment").val() === "bitcoin") {bitcoin.show()}
@@ -166,13 +181,20 @@ $('#userName').on('input', function() {
 });
 
 //  Must enter a valid email address, dave@teamtreehouse.com for example.
-$('#emailAddress').on('input', function() {
-	var input=$(this);
-	var regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-	var email=regex.test(input.val());
+$('#mail').on('input', function() {
+    var input=$(this);
+	var email=mailcheck(input.val());
+    
 	if(email){input.removeClass("invalid").addClass("valid");}
 	else{input.removeClass("valid").addClass("invalid");}
 });
+
+function mailcheck(inputtxt){
+
+    var regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    
+    return regex.test(inputtxt);
+  }
 
 // Must select at least one checkbox
 function box() {
@@ -192,57 +214,55 @@ function box() {
 //Credit Card number, a Zip Code, and a 3 number CVV value 
 //before the form can be submitted.
 
-$('#paymentOptions').on('input', function() {
+$('#cc-num').on('input', function() {
     var input=$(this);
-    var visaRegEx = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
-    var mastercardRegEx = /^(?:5[1-5][0-9]{14})$/;
-    var amexpRegEx = /^(?:3[47][0-9]{13})$/;
-    var discovRegEx = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
-    var postalCodeRegex = /^([0-9]{5})(?:[-\s]*([0-9]{4}))?$/;
-    var CVV = /^[0-9]{3,4}$/;
-    var payment=input.val(); 
+    // var visaRegEx = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+    // var mastercardRegEx = /^(?:5[1-5][0-9]{14})$/;
+    // var amexpRegEx = /^(?:3[47][0-9]{13})$/;
+    // var discovRegEx = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
+    //var postalCodeRegex = /^([0-9]{5})(?:[-\s]*([0-9]{4}))?$/;
+    //
+    // var payment=visaRegEx.test(input.val()) && mastercardRegEx.test(input.val());
+    var paymentIsGood = cardnumber(input.val()) && cardnumber2(input.val()) 
+        && cardnumber3(input.val()) && cardnumber4(input.val());
+
+    if (paymentIsGood){input.removeClass("invalid").addClass("valid");
+}
+    else{input.removeClass("valid").addClass("invalid");
+}
+});
+
+$('#cvv').on('input', function() {
+    var input=$(this);
+    var payment = cvvTest(input.val());
     if (payment){input.removeClass("invalid").addClass("valid");
 }
     else{input.removeClass("valid").addClass("invalid");
 }
 });
-function cardnumber(inputtxt){
 
+
+function cvvTest(inputtxt){
+    var CVV = /^[0-9]{3,4}$/;
+    return CVV.test(inputtxt);
+  }
+
+function cardnumber(inputtxt){
   var cardnumbers = /^(?:3[47][0-9]{13})$/;
-
-  if(inputtxt.value.match(cardnumbers))
-     {
-      return show;
-        }
-    else{
-        alert("Not a valid Amercican Express credit card number!");
-        return hide;
-        }
+  return cardnumbers.test(inputtxt);
 }
 
-function cardnumber(inputtxt){
-
+function cardnumber2(inputtxt){
   var cardnumbers = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
-  if(inputtxt.value.match(cardnumbers)){
-      return show;
-        }
-      else{
-        alert("Not a valid Visa credit card number!");
-        return hide;
-        }
+  return cardnumbers.text(inputtxt);
 }
-function cardnumber(inputtxt){
 
+function cardnumber3(inputtxt){
   var cardnumbers = /^(?:5[1-5][0-9]{14})$/;
-  if(inputtxt.value.match(cardnumbers)){
-      return show;
-        }
-      else{
-        alert("Not a valid Mastercard number!");
-        return hide;
-        }
+  return cardnumbers.text(inputtxt);
 }
-function cardnumber(inputtxt){
+
+function cardnumber4(inputtxt){
 
   var cardnumbers = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
   if(inputtxt.value.match(cardnumbers)) {
@@ -266,18 +286,20 @@ function cardnumber(inputtxt){
       //}
     };
 
+    $('#zip').on('input', function() {
+        var input=$(this);
+        var payment = usZipCode(input.val());
+        if (payment){input.removeClass("invalid").addClass("valid");
+    }
+        else{input.removeClass("valid").addClass("invalid");
+    }
+    });
+
     function usZipCode(str){
 
         postalCodeRegex  = /^[0-9]{5}(?:-[0-9]{4})?$/;
   
-        if (postalCodeRegex.test(str))
-          {
-            return true;
-          }
-        else
-          {
-            return hide;
-          }
+        return postalCodeRegex.test(str);
   };
   
 
@@ -294,6 +316,28 @@ function cardnumber(inputtxt){
   //validate({creditCardNumber: "340000000000000"}, constraints);
 
 
+  $("#formSubmit").on('submit', function(e) {
+    var paymentIsGood = true;
+    if ($("#payment").val() === "credit card") {
+        // validate all credit card fields only if cc is selected
+        paymentIsGood = cardnumber($("#cc-num").val()) 
+            && cardnumber2($("#cc-num").val()) 
+            && cardnumber3($("#cc-num").val()) 
+            && cardnumber4($("#cc-num").val()) 
+            && usZipCode($("#zip").val())
+            && cvvTest($("#cvv").val());
+    } 
+    
+    if ( paymentIsGood && 
+        mailcheck($('#mail').val()) && 
+        $("#cost").val(price) > 0) {
+        console.log("yay");
+    } else {
+        console.log("no");
+        e.preventDefault();
+    }
+  });
+
   function validation(){
   confirmButton.click(function(e) {
     e.preventDefault();
@@ -308,7 +352,7 @@ function cardnumber(inputtxt){
     } else if (!cvvValid) {
         alert("Enter valid 3 digit CVV");
     } else {
-        // Everything is correct. Add your form submission code here.
+ // Everything is correct. Add your form submission code here.
         alert("Everything is correct");
     }
 });
