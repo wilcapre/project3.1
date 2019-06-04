@@ -11,33 +11,22 @@ document.getElementById("name").focus();
 //Include a text field that will be revealed when the "Other"
 // option is selected from the "Job Role" drop down menu.
 
-
-//var jobRoleSelect = document.getElementById('other-title');
-
-//var jobRoleSelect = $('#jobRolSelect').get('other-title');
 const $otherJobInput = $('#other-title');
-//document.getElementById("other-title").addEventListener("change", function(){
 var infoSection = $('.basics');
-  // var jobSelected = document.getElementById('other-title').value;
-
-  //$(document).jobRoleSelect(function(){
+  
     $("#other-title").hide();
       $("#title").change(function() {
           if($(this).val() == "other") {
               $("#other-title").show();
-              
             }
             else {
-                $("#other-title").hide();
-                //if(document.getElementById("job_role_other")) {
-                //    infoSection.removeChild(document.getElementById("other-title"));
-                //}
+                $("#other-title").hide();  
             }
       });
 
 //For the T-Shirt "Color" menu, only display the color options that match 
 //the design selected in the "Design" menu.
-
+//whichever design has been selected, match color will be displayed, if it doesn't macth color will be hiding.
 $("#design").change(function() {
     if($(this).val() == "js puns") {
         
@@ -60,26 +49,6 @@ $("#design").change(function() {
 });
 
 
-// var designMenu = 
-// var jsPuns = document.getElementById("design").value;
-// var iHeartJs = document.getElementById("design").value;
-
-//whichever design has been selected, match color will be displayed, if it doesn't macth color will be hiding.
-// if (designMenu === jsPuns) {
-//     var onColors = document.getElementsByClassName("puns");
-//     onColors.style.display = 'block';
-    
-//     var offColors = document.getElementsByName("heart");
-//     offColors.style.display = 'none';
-// }
-
-// if (designMenu === iLoveJs) {
-//     var onColors = document.getElementsByClassName("heart");
-//     onColors.style.display = 'block';
-//     var offColors = document.getElementsByName("puns");
-//     offColors.style.display = 'none';
-// }
-
 //Register for activities.
 
 document.querySelector(".activities").addEventListener("change", function(){
@@ -93,11 +62,7 @@ document.querySelector(".activities").addEventListener("change", function(){
 });
 
 
-//This is no longer disabled when a user unchecks an activity.
-
-   
-
-//As a user select activities, a running total should display below the list of checkboxes. 
+//This is no longer disabled when a user unchecks an activity. 
 
 $('.checked_all').on('change', function() { 
     $('.checkbox').prop('checked', $(this).prop("checked")); 
@@ -127,6 +92,8 @@ $('.activities').change(function(){
             });
         }
     });
+
+    //As a user select activities, a running total should display below the list of checkboxes. 
     $("#cost").val(price);
     if (price > 0) {
         $("#cost").removeClass("invalid").addClass("valid");
@@ -190,7 +157,6 @@ $('#mail').on('input', function() {
 });
 
 function mailcheck(inputtxt){
-
     var regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     
     return regex.test(inputtxt);
@@ -263,15 +229,14 @@ function cardnumber3(inputtxt){
 }
 
 function cardnumber4(inputtxt){
-
   var cardnumbers = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
-  if(inputtxt.value.match(cardnumbers)) {
-      return show;
-        }
-      else{
-        alert("Not a valid Discover card number!");
-        return hide;
-        }
+ // if(inputtxt.value.match(cardnumbers)) {
+
+      return cardnumbers.text(inputtxt);
+     // else{
+      //  alert("Not a valid Discover card number!");
+       // return hide;
+        //}
 
 
       //length: function(value) {
@@ -296,9 +261,7 @@ function cardnumber4(inputtxt){
     });
 
     function usZipCode(str){
-
         postalCodeRegex  = /^[0-9]{5}(?:-[0-9]{4})?$/;
-  
         return postalCodeRegex.test(str);
   };
   
@@ -331,9 +294,9 @@ function cardnumber4(inputtxt){
     if ( paymentIsGood && 
         mailcheck($('#mail').val()) && 
         $("#cost").val(price) > 0) {
-        console.log("yay");
+        //console.log("yay");
     } else {
-        console.log("no");
+        //console.log("no");
         e.preventDefault();
     }
   });
