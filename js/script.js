@@ -118,30 +118,34 @@ $('.activities').change(function(){
 
     $(document).ready(function(){ 
         $('#payment').change(function(){
-          alert($(this).val());                                                          
-        });
-   });
+          alert($(this).val());  
+          
+          const paragraphs = $("p"); 
+          const paypal = $(paragraphs[0]); 
+          const bitcoin = $(paragraphs[1]);
+       
 //const div = ("creditCard");
-    console.log($("#payment").val());
+    //console.log($("#payment").val());
+
     if ($("#payment").val() === "credit card") {
         $("#credit-card").show();
     } else {
         $("#credit-card").hide();
     }
-
     if ($("#payment").val() === "paypal") {
-        $("paypal").show();
+        $("#paypal").hide();
     } else {
-        $(paypal).hide();
+        $("#paypal").hide();
         }
 
     if ($("#payment").val() === "bitcoin") {
-        $bitcoin.show();
+        $("#bitcoin").hide();
     } else {
-        $(bitcoin).hide();
+        $("#bitcoin").hide();
     }
   
-
+});
+});
 
 
 // this is to create a validation errors that would exist, prevent the user from submitting the form.
