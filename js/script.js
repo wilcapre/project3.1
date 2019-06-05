@@ -110,12 +110,17 @@ $('.activities').change(function(){
 
 //This will shows payment Informations.
 
-document.getElementById("payment").addEventListener("change", function(){
+//document.getElementById("payment").addEventListener("change", function(){
 
-    var creditCard = document.getElementById("credit-card");
-    var paypal = document.getElementById("paypal");
-    var bitcoin = document.getElementById("bitcoin");
+   // var creditCard = document.getElementById("credit-card");
+    //var paypal = document.getElementById("paypal");
+    //var bitcoin = document.getElementById("bitcoin");
 
+    $(document).ready(function(){ 
+        $('#payment').change(function(){
+          alert($(this).val());                                                          
+        });
+   });
 //const div = ("creditCard");
     console.log($("#payment").val());
     if ($("#payment").val() === "credit card") {
@@ -124,12 +129,19 @@ document.getElementById("payment").addEventListener("change", function(){
         $("#credit-card").hide();
     }
 
-    if ($("#payment").val() === "paypal") {paypal.show()}
-    else $(paypal).hide();
-    if ($("#payment").val() === "bitcoin") {bitcoin.show()}
-    else $(bitcoin).hide();
+    if ($("#payment").val() === "paypal") {
+        $("paypal").show();
+    } else {
+        $(paypal).hide();
+        }
+
+    if ($("#payment").val() === "bitcoin") {
+        $bitcoin.show();
+    } else {
+        $(bitcoin).hide();
+    }
   
-});
+
 
 
 // this is to create a validation errors that would exist, prevent the user from submitting the form.
