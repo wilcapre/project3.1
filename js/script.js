@@ -137,7 +137,6 @@ document.getElementById("payment").addEventListener("change", function(){
 
 // Name must be entered can't leave it blank.
 
-
 $('#userName').on('input', function() {
 });
 $('#userName').on('input', function() {
@@ -187,7 +186,6 @@ $('#cc-num').on('input', function() {
     // var amexpRegEx = /^(?:3[47][0-9]{13})$/;
     // var discovRegEx = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
     //var postalCodeRegex = /^([0-9]{5})(?:[-\s]*([0-9]{4}))?$/;
-    //
     // var payment=visaRegEx.test(input.val()) && mastercardRegEx.test(input.val());
     var paymentIsGood = cardnumber(input.val()) && cardnumber2(input.val()) 
         && cardnumber3(input.val()) && cardnumber4(input.val());
