@@ -227,26 +227,26 @@ function cvvTest(inputtxt){
     return CVV.test(inputtxt);
   }
 
-function cardnumber(inputtxt){
+function cardnumber(inputtxt){    //4222222222222
   var cardnumbers = /^(?:3[47][0-9]{13})$/;
   return cardnumbers.test(inputtxt);
 }
 
-function cardnumber2(inputtxt){
+function cardnumber2(inputtxt){  //5105105105105100
   var cardnumbers = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
-  return cardnumbers.text(inputtxt);
+  return cardnumbers.test(inputtxt);
 }
 
-function cardnumber3(inputtxt){
+function cardnumber3(inputtxt){  //378282246310005
   var cardnumbers = /^(?:5[1-5][0-9]{14})$/;
-  return cardnumbers.text(inputtxt);
+  return cardnumbers.test(inputtxt);
 }
 
-function cardnumber4(inputtxt){
+function cardnumber4(inputtxt){ //6011000990139424
   var cardnumbers = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
  // if(inputtxt.value.match(cardnumbers)) {
 
-      return cardnumbers.text(inputtxt);
+      return cardnumbers.test(inputtxt);
      // else{
       //  alert("Not a valid Discover card number!");
        // return hide;
