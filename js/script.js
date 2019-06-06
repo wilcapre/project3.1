@@ -202,23 +202,11 @@ $('#cc-num').on('input', function() {
     // var amexpRegEx = /^(?:3[47][0-9]{13})$/;
     // var discovRegEx = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
     //var postalCodeRegex = /^([0-9]{5})(?:[-\s]*([0-9]{4}))?$/;
-    // var payment=visaRegEx.test(input.val()) && mastercardRegEx.test(input.val());
-    // var paymentIsGood = cardnumber(input.val()) && cardnumber2(input.val()) 
-    //   && cardnumber3(input.val()) && cardnumber4(input.val());
+     //var payment = visaRegEx.test(input.val()) && mastercardRegEx.test(input.val());
+     var paymentIsGood = cardnumber(input.val());
+     //|| cardnumber2(input.val()) 
+      //|| cardnumber3(input.val()) || cardnumber4(input.val());
 
-// card validation
-
-var paymentIsGood = cardnumber(input.val()) 
-|| cardnumber2(input.val())
-|| cardnumber3(input.val())
-|| cardnumber4(input.val());
-
-paymentIsGood = (cardnumber($("#cc-num").val()) 
-|| cardnumber2($("#cc-num").val()) 
-|| cardnumber3($("#cc-num").val())
-|| cardnumber4($("#cc-num").val()))
-&& usZipCode($("#zip").val())
-&& cvvTest($("#cvv").val());
 
 
     if (paymentIsGood){input.removeClass("invalid").addClass("valid");
@@ -247,6 +235,7 @@ function cardnumber(inputtxt){    //4222222222222
   return cardnumbers.test(inputtxt);
 }
 
+/***
 function cardnumber2(inputtxt){  //5105105105105100
   var cardnumbers = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
   return cardnumbers.test(inputtxt);
@@ -280,6 +269,8 @@ function cardnumber4(inputtxt){ //6011000990139424
       //}
     };
 
+***/
+
     $('#zip').on('input', function() {
         var input=$(this);
         var payment = usZipCode(input.val());
@@ -294,38 +285,38 @@ function cardnumber4(inputtxt){ //6011000990139424
         return postalCodeRegex.test(str);
   };
   
-
-  //document.getElementById("card").addEventListener("validate", function () 
- // validate({creditCardNumber: "4"}, constraints);
-  // => {"creditCardNumber": ["Credit card (should be 16 characters)"]}
-  
-  //validate({creditCardNumber: "9999999999999999"}, constraints);
-  // => {"creditCardNumber": ["9999999999999999  not a valid credit card number"]}
-  
-  //validate({creditCardNumber: "4242424242424242"}, constraints);
-  // => undefined
-  
-  //validate({creditCardNumber: "340000000000000"}, constraints);
-
-
-  $("#formSubmit").on('submit', function(e) {
+  $("#formSubmit").on ("submit", function(e) {
     var paymentIsGood = true;
     if ($("#payment").val() === "credit card") {
-        // validate all credit card fields only if cc is selected
-        paymentIsGood = cardnumber($("#cc-num").val()) 
-            && cardnumber2($("#cc-num").val()) 
-            && cardnumber3($("#cc-num").val()) 
-            && cardnumber4($("#cc-num").val()) 
-            && usZipCode($("#zip").val())
-            && cvvTest($("#cvv").val());
-    } 
+// validate all credit card fields only if cc is selected
+
+     paymentIsGood = cardnumber($("#cc-num").val()) 
+        //   && cardnumber2($("#cc-num").val()) 
+        // && cardnumber3($("#cc-num").val()) 
+        //&& cardnumber4($("#cc-num").val()) 
+     && usZipCode($("#zip").val())
+     && cvvTest($("#cvv").val());
+
+var paymentIsGood = cardnumber(input.val());
+//|| cardnumber2(input.val())
+//|| cardnumber3(input.val())
+//|| cardnumber4(input.val());
+
+//paymentIsGood = (cardnumber($("#cc-num").val())
+//|| cardnumber2($("#cc-num").val()) 
+//|| cardnumber3($("#cc-num").val())
+//||cardnumber4($("#cc-num").val()))
+  //&& usZipCode($("#zip").val())
+  //&& cvvTest($("#cvv").val());
+
+ }
     
     if ( paymentIsGood && 
         mailcheck($('#mail').val()) && 
         $("#cost").val(price) > 0) {
-        //console.log("yay");
+        console.log("yay");
     } else {
-        //console.log("no");
+        console.log("no");
         e.preventDefault();
     }
   });
@@ -347,8 +338,8 @@ function cardnumber4(inputtxt){ //6011000990139424
  // Everything is correct. Add your form submission code here.
         alert("Everything is correct");
     }
-});
-  }
+ });
+}
 
 /***
 // must enter a message, this can't leave blank
