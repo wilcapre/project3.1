@@ -231,7 +231,7 @@ function cvvTest(inputtxt){
   }
 
 function cardnumber(inputtxt){    //4222222222222
-  var cardnumbers = /^(?:3[47][0-9]{13})$/;
+  var cardnumbers = /^\d{13,16}$/;         ///^(?:3[47][0-9]{13,16})$/; 
   return cardnumbers.test(inputtxt);
 }
 
@@ -285,38 +285,38 @@ function cardnumber4(inputtxt){ //6011000990139424
         return postalCodeRegex.test(str);
   };
   
-  $("#formSubmit").on ("submit", function(e) {
+  $("#formSubmit").on ("focusout", function(e) {
     var paymentIsGood = true;
     if ($("#payment").val() === "credit card") {
 // validate all credit card fields only if cc is selected
 
-     paymentIsGood = cardnumber($("#cc-num").val()) 
-        //   && cardnumber2($("#cc-num").val()) 
+paymentIsGood = cardnumber($("#cc-num").val()) 
+        // && cardnumber2($("#cc-num").val()) 
         // && cardnumber3($("#cc-num").val()) 
-        //&& cardnumber4($("#cc-num").val()) 
+        // && cardnumber4($("#cc-num").val()) 
      && usZipCode($("#zip").val())
      && cvvTest($("#cvv").val());
 
-var paymentIsGood = cardnumber(input.val());
+//var paymentIsGood = cardnumber(input.val());
 //|| cardnumber2(input.val())
 //|| cardnumber3(input.val())
 //|| cardnumber4(input.val());
 
-//paymentIsGood = (cardnumber($("#cc-num").val())
+paymentIsGood = cardnumber($("#cc-num").val())
 //|| cardnumber2($("#cc-num").val()) 
 //|| cardnumber3($("#cc-num").val())
 //||cardnumber4($("#cc-num").val()))
-  //&& usZipCode($("#zip").val())
-  //&& cvvTest($("#cvv").val());
+  && usZipCode($("#zip").val())
+  && cvvTest($("#cvv").val());
 
- }
+    } 
     
-    if ( paymentIsGood && 
-        mailcheck($('#mail').val()) && 
+    if ( paymentIsGood ||
+        mailcheck($("#mail").val()) ||
         $("#cost").val(price) > 0) {
-        console.log("yay");
+        //console.log("yay");
     } else {
-        console.log("no");
+        //console.log("no");
         e.preventDefault();
     }
   });
