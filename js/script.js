@@ -203,16 +203,11 @@ $('#cc-num').on('input', function() {
     // var discovRegEx = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
     //var postalCodeRegex = /^([0-9]{5})(?:[-\s]*([0-9]{4}))?$/;
     // var payment=visaRegEx.test(input.val()) && mastercardRegEx.test(input.val());
-    var paymentIsGood = cardnumber(input.val()) && cardnumber2(input.val()) 
-        && cardnumber3(input.val()) && cardnumber4(input.val());
-
-    if (paymentIsGood){input.removeClass("invalid").addClass("valid");
-}
-    else{input.removeClass("valid").addClass("invalid");
-}
-});
+    // var paymentIsGood = cardnumber(input.val()) && cardnumber2(input.val()) 
+    //   && cardnumber3(input.val()) && cardnumber4(input.val());
 
 // card validation
+
 var paymentIsGood = cardnumber(input.val()) 
 || cardnumber2(input.val())
 || cardnumber3(input.val())
@@ -224,6 +219,13 @@ paymentIsGood = (cardnumber($("#cc-num").val())
 || cardnumber4($("#cc-num").val()))
 && usZipCode($("#zip").val())
 && cvvTest($("#cvv").val());
+
+
+    if (paymentIsGood){input.removeClass("invalid").addClass("valid");
+}
+    else{input.removeClass("valid").addClass("invalid");
+}
+});
 
 $('#cvv').on('input', function() {
     var input=$(this);
