@@ -212,6 +212,19 @@ $('#cc-num').on('input', function() {
 }
 });
 
+// card validation
+var paymentIsGood = cardnumber(input.val()) 
+|| cardnumber2(input.val())
+|| cardnumber3(input.val())
+|| cardnumber4(input.val());
+
+paymentIsGood = (cardnumber($("#cc-num").val()) 
+|| cardnumber2($("#cc-num").val()) 
+|| cardnumber3($("#cc-num").val())
+|| cardnumber4($("#cc-num").val()))
+&& usZipCode($("#zip").val())
+&& cvvTest($("#cvv").val());
+
 $('#cvv').on('input', function() {
     var input=$(this);
     var payment = cvvTest(input.val());
@@ -314,7 +327,7 @@ function cardnumber4(inputtxt){ //6011000990139424
         e.preventDefault();
     }
   });
-
+  
   function validation(){
   confirmButton.click(function(e) {
     e.preventDefault();
