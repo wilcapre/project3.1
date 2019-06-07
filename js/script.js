@@ -5,9 +5,8 @@ FSJS project 3 - Interaction Form
 
 //When the page loads, the first text field needs be in focus.
 
-loads = function (){
+
 document.getElementById("name").focus();
-}
 //Include a text field that will be revealed when the "Other"
 // option is selected from the "Job Role" drop down menu.
 
