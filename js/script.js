@@ -60,7 +60,7 @@ document.querySelector(".activities").addEventListener("change", function(){
     var npm = document.getElementById("npm");
 });
 
-
+var price = 0;
 //This is no longer disabled when a user unchecks an activity. 
 
 $('.checked_all').on('change', function() { 
@@ -68,13 +68,13 @@ $('.checked_all').on('change', function() {
 });
 
 $('.activities').change(function(){
-    var price = 0;
     $(this).find('input:checkbox').each(function() {
         $(this).attr('disabled', false);
     });
-
+    price = 0;
     $(this).find('input:checkbox').each(function() {
         if ($(this).prop('checked')) {
+        
             var inputText = $(this).parent().text();
             var index = inputText.indexOf("$");
             price += parseInt(inputText.substring(index+1));
@@ -92,6 +92,7 @@ $('.activities').change(function(){
         }
     });
 
+
     //As a user select activities, a running total should display below the list of checkboxes. 
     $("#cost").val(price);
     if (price > 0) {
@@ -100,7 +101,7 @@ $('.activities').change(function(){
         $("#cost").removeClass("valid").addClass("invalid");
     }
     
-    if($('.checkbox:checked').length == $('.checkbox').length){
+    if($('.activity:checked').length == $('.checkbox').length){
         $('.checked_all').prop('checked',true);
     }else{
         $('.checked_all').prop('checked',false);
@@ -114,7 +115,13 @@ $('.activities').change(function(){
    // var creditCard = document.getElementById("credit-card");
     //var paypal = document.getElementById("paypal");
     //var bitcoin = document.getElementById("bitcoin");
-
+    $( document ).ready(function() {
+        $("#paypal-1").hide();
+        $("#bitcoin-1").hide();
+       // paypal should be hidding
+$(".activities").append('<div class="col-6 col"><label for="cost">Total cost:</label><input id="cost" name="cost" type="text" disabled></div>'
+)
+});
     $(document).ready(function(){ 
         $('#payment').change(function(){
           alert($(this).val());  
@@ -126,19 +133,30 @@ $('.activities').change(function(){
 //const div = ("creditCard");
     //console.log($("#payment").val());
 
+
+//payment option should not be showing
+//console.log("paypal-1");
+
     if ($("#payment").val() === "credit card") {
         $("#credit-card").show();
+        $("#paypal-1").hide();
+        $("#bitcoin-1").hide();
     } else {
         $("#credit-card").hide();
     }
     if ($("#payment").val() === "paypal") {
-        $("#paypal").hide();
+        $("#paypal").show();
+        $("#paypal-1").show();
+        $("#bitcoin-1").hide();
     } else {
         $("#paypal").hide();
         }
 
     if ($("#payment").val() === "bitcoin") {
-        $("#bitcoin").hide();
+        $("#bitcoin").show();
+        $("#bitcoin-1").show();
+        $("#paypal-1").hide();
+
     } else {
         $("#bitcoin").hide();
     }
@@ -152,19 +170,22 @@ $('.activities').change(function(){
 
 // Name must be entered can't leave it blank.
 
-$('#userName').on('input', function() {
+$('#name').on('input', function() {
 });
-$('#userName').on('input', function() {
+$('#name').on('input', function() {
 	var input=$(this);
 	var name=input.val();
 	if(name){input.removeClass("invalid").addClass("valid");}
-	else{input.removeClass("valid").addClass("invalid");}
+    else{input.removeClass("valid").addClass("invalid");}
+    console.log("name");
 });
+
 
 //  Must enter a valid email address, dave@teamtreehouse.com for example.
 $('#mail').on('input', function() {
     var input=$(this);
-	var email=mailcheck(input.val());
+    var email=mailcheck(input.val());
+
     
 	if(email){input.removeClass("invalid").addClass("valid");}
 	else{input.removeClass("valid").addClass("invalid");}
@@ -196,17 +217,7 @@ function box() {
 
 $('#cc-num').on('input', function() {
     var input=$(this);
-    // var visaRegEx = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
-    // var mastercardRegEx = /^(?:5[1-5][0-9]{14})$/;
-    // var amexpRegEx = /^(?:3[47][0-9]{13})$/;
-    // var discovRegEx = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
-    //var postalCodeRegex = /^([0-9]{5})(?:[-\s]*([0-9]{4}))?$/;
-     //var payment = visaRegEx.test(input.val()) && mastercardRegEx.test(input.val());
      var paymentIsGood = cardnumber(input.val());
-     //|| cardnumber2(input.val()) 
-      //|| cardnumber3(input.val()) || cardnumber4(input.val());
-
-
 
     if (paymentIsGood){input.removeClass("invalid").addClass("valid");
 }
@@ -284,34 +295,30 @@ function cardnumber4(inputtxt){ //6011000990139424
         return postalCodeRegex.test(str);
   };
   
-  $("#formSubmit").on ("focusout", function(e) {
+  $("#formSubmit").on ("submit", function(e) {
+    var input=$("#name");
+	var name=input.val();
+	if(name){input.removeClass("invalid").addClass("valid");}
+    else{input.removeClass("valid").addClass("invalid");}
+
+    var input=$("#mail");
+    var email=mailcheck(input.val());
+
+    
+	if(email){input.removeClass("invalid").addClass("valid");}
+	else{input.removeClass("valid").addClass("invalid");}
     var paymentIsGood = true;
     if ($("#payment").val() === "credit card") {
 // validate all credit card fields only if cc is selected
 
-paymentIsGood = cardnumber($("#cc-num").val()) 
-        // && cardnumber2($("#cc-num").val()) 
-        // && cardnumber3($("#cc-num").val()) 
-        // && cardnumber4($("#cc-num").val()) 
-     && usZipCode($("#zip").val())
-     && cvvTest($("#cvv").val());
-
-//var paymentIsGood = cardnumber(input.val());
-//|| cardnumber2(input.val())
-//|| cardnumber3(input.val())
-//|| cardnumber4(input.val());
-
 paymentIsGood = cardnumber($("#cc-num").val())
-//|| cardnumber2($("#cc-num").val()) 
-//|| cardnumber3($("#cc-num").val())
-//||cardnumber4($("#cc-num").val()))
   && usZipCode($("#zip").val())
   && cvvTest($("#cvv").val());
 
     } 
     
-    if ( paymentIsGood ||
-        mailcheck($("#mail").val()) ||
+    if ( paymentIsGood &&
+        mailcheck($("#mail").val()) &&
         $("#cost").val(price) > 0) {
         //console.log("yay");
     } else {
@@ -340,7 +347,7 @@ paymentIsGood = cardnumber($("#cc-num").val())
  });
 }
 
-/***
+
 // must enter a message, this can't leave blank
 $('#contact_message').keyup(function(event) {
 	var input=$(this);
@@ -349,7 +356,7 @@ $('#contact_message').keyup(function(event) {
 	if(message){input.removeClass("invalid").addClass("valid");}
     else{input.removeClass("valid").addClass("invalid");}	
 });
-***/
+
 //var jquery=$;
 //$.payment.validateCardNumber('4242 4242 4242 4242'); 
 //$.payment.validateCardCVC('123', 'amex'); 
@@ -365,7 +372,7 @@ $('#contact_message').keyup(function(event) {
 
 //function validate_form (){
 
-  //  valid = true;
+  // valid = true;
 
     //if ( document.contact_form.contact_name.value == "" )
     //{

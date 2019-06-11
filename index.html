@@ -63,6 +63,7 @@
         <div id="colors-js-puns" class="">
           <label for="color">Color:</label>
           <select id="color">
+            <option> Select Color</option>
             <option value="cornflowerblue">Cornflower Blue (JS Puns shirt only)</option>
             <option value="darkslategrey">Dark Slate Grey (JS Puns shirt only)</option> 
             <option value="gold">Gold (JS Puns shirt only)</option> 
@@ -75,25 +76,21 @@
 
       <fieldset class="activities">
         <legend>Register for Activities</legend>
-        <label><input type="checkbox" name="all" > Main Conference — $200</label>
-        <label><input type="checkbox" name="js-frameworks" > JavaScript Frameworks Workshop — Tuesday 9am-12pm, $100</label>
-        <label><input type="checkbox" name="js-libs" > JavaScript Libraries Workshop — Tuesday 1pm-4pm, $100</label>
-        <label><input type="checkbox" name="express" > Express Workshop — Tuesday 9am-12pm, $100</label>
-        <label><input type="checkbox" name="node" > Node.js Workshop — Tuesday 1pm-4pm, $100</label>          
-        <label><input type="checkbox" name="build-tools" > Build tools Workshop — Wednesday 9am-12pm, $100</label>
-        <label><input type="checkbox" name="npm" > npm Workshop — Wednesday 1pm-4pm, $100</label>
+        <label><input class="activity" type="checkbox" name="all" > Main Conference — $200</label>
+        <label><input class="activity" type="checkbox" name="js-frameworks" > JavaScript Frameworks Workshop — Tuesday 9am-12pm, $100</label>
+        <label><input class="activity" type="checkbox" name="js-libs" > JavaScript Libraries Workshop — Tuesday 1pm-4pm, $100</label>
+        <label><input class="activity" type="checkbox" name="express" > Express Workshop — Tuesday 9am-12pm, $100</label>
+        <label><input class="activity" type="checkbox" name="node" > Node.js Workshop — Tuesday 1pm-4pm, $100</label>          
+        <label><input class="activity" type="checkbox" name="build-tools" > Build tools Workshop — Wednesday 9am-12pm, $100</label>
+        <label><input class="activity" type="checkbox" name="npm" > npm Workshop — Wednesday 1pm-4pm, $100</label>
                  
-        <div class="col-6 col">
-            <label for="cost">Total cost:</label>
-            <input id="cost" name="cost" type="text" disabled>
-          </div>
       </fieldset>
       <fieldset class = "paymentOptions">
         <legend>Payment Info</legend>
 
         <label for="payment">I'm going to pay with:</label>
         <select id="payment" name="user_payment">
-          <option value="select_method">Select Payment Method</option>
+          <!-- <option value="select_method">Select Payment Method</option> -->
           <option value="credit card">Credit Card</option>
           <option value="paypal">PayPal</option>
           <option value="bitcoin">Bitcoin</option>
@@ -144,11 +141,11 @@
           </select> 	                  	         
         </div>
 
-        <div>
+        <div id="paypal-1">
         	<p>If you selected the PayPal option we'll take you to Paypal's site to set up your billing information, when you click “Register” below.</p>
         </div> 
 
-        <div>
+        <div id="bitcoin-1">
         	<p>If you selected the Bitcoin option we'll take you to the Coinbase site to set up your billing information. Due to the nature of exchanging Bitcoin, all Bitcoin transactions will be final.</p>
         </div>                  
 
