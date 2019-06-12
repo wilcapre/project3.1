@@ -25,11 +25,12 @@ var infoSection = $('.basics');
 
 $("#colors-js-puns").hide();
 
-const $selectTheme = $("#design").eq(0);
+//const $selectTheme = $("#design").eq(0);
 
 $("#design div").change(function() {
-   // $("#color-js-puns").show();
+   $("#color-js-puns").show();
 
+   /***
    $("select").slideToggle();
    $("selectTheme").removeClass("dispay", "none");
 });
@@ -38,7 +39,7 @@ $("selectOption").click(function () {
 $("selectTheme").change();
 $(this).find(select).slideToggle();
 });
-
+***/
 //For the T-Shirt "Color" menu, only display the color options that match 
 //the design selected in the "Design" menu.
 //whichever design has been selected, match color will be displayed, if it doesn't macth color will be hiding.
