@@ -23,6 +23,22 @@ var infoSection = $('.basics');
             }
       });
 
+$("#colors-js-puns").hide();
+
+const $selectTheme = $("#design").eq(0);
+
+$("#design div").change(function() {
+   // $("#color-js-puns").show();
+
+   $("select").slideToggle();
+   $("selectTheme").removeClass("dispay", "none");
+});
+
+$("selectOption").click(function () {
+$("selectTheme").change();
+$(this).find(select).slideToggle();
+});
+
 //For the T-Shirt "Color" menu, only display the color options that match 
 //the design selected in the "Design" menu.
 //whichever design has been selected, match color will be displayed, if it doesn't macth color will be hiding.
@@ -304,9 +320,9 @@ function cardnumber4(inputtxt){ //6011000990139424
     var input=$("#mail");
     var email=mailcheck(input.val());
 
-    
 	if(email){input.removeClass("invalid").addClass("valid");}
-	else{input.removeClass("valid").addClass("invalid");}
+    else{input.removeClass("valid").addClass("invalid");}
+    
     var paymentIsGood = true;
     if ($("#payment").val() === "credit card") {
 // validate all credit card fields only if cc is selected
@@ -314,9 +330,8 @@ function cardnumber4(inputtxt){ //6011000990139424
 paymentIsGood = cardnumber($("#cc-num").val())
   && usZipCode($("#zip").val())
   && cvvTest($("#cvv").val());
-
     } 
-    
+
     if ( paymentIsGood &&
         mailcheck($("#mail").val()) &&
         $("#cost").val(price) > 0) {
