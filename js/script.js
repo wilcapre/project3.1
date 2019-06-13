@@ -23,12 +23,60 @@ var infoSection = $('.basics');
             }
       });
 
+
 $("#colors-js-puns").hide();
+$("#design div").change(function() {
+    $("#colors-js-puns").show();
+    //$("#design").show();
+    });
+
+
+//$("#heart js").show();
+//$("#design div").change(function() {
+  //  $("#heart js").show();
+//});
+/***
+$( "select" )
+  .change(function () {
+    var str = "";
+    $( "select option:selected" ).each(function() {
+      str += $( this ).text() + " ";
+    });
+    $( "div" ).text( str );
+  })
+  .change();
+***/
+
+
+//$("#design").show();
+//$("#colors-js-puns").change(function(){
+  //  $("#corlor").show();
+    //$("#design").hide();
+
+//});
+
 
 //const $selectTheme = $("#design").eq(0);
 
-$("#design div").change(function() {
+
+/** 
+$("#design").change(function() {
    $("#color-js-puns").show();
+$(document).ready(function () {
+    $(".button").click(function (){
+        var val = $(this).attr("design");
+        if (val == 1) {
+            $("selectTheme").hide();
+            $(this).attr("design", "0");
+        } else{
+            $("selecTheme").show();
+            $(this).attr("design", "1");
+        }
+    }); 
+    });
+}
+**/
+
 
    /***
    $("select").slideToggle();
@@ -40,9 +88,11 @@ $("selectTheme").change();
 $(this).find(select).slideToggle();
 });
 ***/
+
 //For the T-Shirt "Color" menu, only display the color options that match 
 //the design selected in the "Design" menu.
 //whichever design has been selected, match color will be displayed, if it doesn't macth color will be hiding.
+
 $("#design").change(function() {
     if($(this).val() == "js puns") {
         
