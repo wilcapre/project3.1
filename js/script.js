@@ -25,10 +25,10 @@ var infoSection = $('.basics');
 
 
 $("#colors-js-puns").hide();
-$("#design div").change(function() {
-    $("#colors-js-puns").show();
+// $("#design").change(function() {
+//    $("#colors-js-puns").show();
     //$("#design").show();
-    });
+    //});
 
 
 //$("#heart js").show();
@@ -94,21 +94,22 @@ $(this).find(select).slideToggle();
 //whichever design has been selected, match color will be displayed, if it doesn't macth color will be hiding.
 
 $("#design").change(function() {
+    $("#colors-js-puns").show();
     if($(this).val() == "js puns") {
         
-        $("#color").find("option[value='cornflowerblue']").show();
+        $("#color").find("option[value='cornflowerblue']").show().attr("selected","");
         $("#color").find("option[value='darkslategrey']").show();
         $("#color").find("option[value='gold']").show();
 
-        $("#color").find("option[value='tomato']").hide();
+        $("#color").find("option[value='tomato']").hide().attr("selected", false);
         $("#color").find("option[value='steelblue']").hide();
         $("#color").find("option[value='dimgrey']").hide();
     } else {
-        $("#color").find("option[value='cornflowerblue']").hide();
+        $("#color").find("option[value='cornflowerblue']").hide().attr("selected", false);
         $("#color").find("option[value='darkslategrey']").hide();
         $("#color").find("option[value='gold']").hide();
 
-        $("#color").find("option[value='tomato']").show();
+        $("#color").find("option[value='tomato']").show().attr("selected", "");
         $("#color").find("option[value='steelblue']").show();
         $("#color").find("option[value='dimgrey']").show();
     }
@@ -378,20 +379,44 @@ function cardnumber4(inputtxt){ //6011000990139424
     if ($("#payment").val() === "credit card") {
 // validate all credit card fields only if cc is selected
 
-paymentIsGood = cardnumber($("#cc-num").val())
-  && usZipCode($("#zip").val())
-  && cvvTest($("#cvv").val());
-    } 
+        paymentIsGood = cardnumber($("#cc-num").val())
+        && usZipCode($("#zip").val())
+        && cvvTest($("#cvv").val());
+        if (cardnumber($("#cc-num").val())===false){
+            $("#cc-num").removeClass("valid").addClass("invalid");
+        } else {
+            $("#cc-num").removeClass("invalid").addClass("valid");
+            
+        }
 
+        if (usZipCode($("#zip").val())===false){
+            $("#zip").removeClass("valid").addClass("invalid");
+        } else {
+            $("#zip").removeClass("invalid").addClass("valid");
+        }
+        if (cvvTest($("#cvv").val())===false){
+            $("#cvv").removeClass("valid").addClass("invalid");
+        } else {
+            $("#cvv").removeClass("invalid").addClass("valid");
+        }
+    }
+    $("#cost").val(price);
+    if (price > 0) {
+        $("#cost").removeClass("invalid").addClass("valid");
+    } else {
+        $("#cost").removeClass("valid").addClass("invalid");
+    }
+    
     if ( paymentIsGood &&
         mailcheck($("#mail").val()) &&
+        $("#name").val() &&
         $("#cost").val(price) > 0) {
         //console.log("yay");
     } else {
         //console.log("no");
         e.preventDefault();
     }
-  });
+});
   
   function validation(){
   confirmButton.click(function(e) {
