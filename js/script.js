@@ -94,9 +94,10 @@ $(this).find(select).slideToggle();
 //whichever design has been selected, match color will be displayed, if it doesn't macth color will be hiding.
 
 $("#design").change(function() {
-    $("#colors-js-puns").show();
+    
     if($(this).val() == "js puns") {
-        
+        $("#colors-js-puns").show();
+
         $("#color").find("option[value='cornflowerblue']").show().attr("selected","");
         $("#color").find("option[value='darkslategrey']").show();
         $("#color").find("option[value='gold']").show();
@@ -104,7 +105,9 @@ $("#design").change(function() {
         $("#color").find("option[value='tomato']").hide().attr("selected", false);
         $("#color").find("option[value='steelblue']").hide();
         $("#color").find("option[value='dimgrey']").hide();
-    } else {
+    } else if ($(this).val() == "heart js") {
+        $("#colors-js-puns").show();
+
         $("#color").find("option[value='cornflowerblue']").hide().attr("selected", false);
         $("#color").find("option[value='darkslategrey']").hide();
         $("#color").find("option[value='gold']").hide();
@@ -112,7 +115,10 @@ $("#design").change(function() {
         $("#color").find("option[value='tomato']").show().attr("selected", "");
         $("#color").find("option[value='steelblue']").show();
         $("#color").find("option[value='dimgrey']").show();
+    } else {
+        $("#colors-js-puns").hide();
     }
+
 });
 
 
@@ -192,7 +198,7 @@ $(".activities").append('<div class="col-6 col"><label for="cost">Total cost:</l
 });
     $(document).ready(function(){ 
         $('#payment').change(function(){
-          alert($(this).val());  
+         
           
           const paragraphs = $("p"); 
           const paypal = $(paragraphs[0]); 
@@ -364,6 +370,7 @@ function cardnumber4(inputtxt){ //6011000990139424
   };
   
   $("#formSubmit").on ("submit", function(e) {
+    
     var input=$("#name");
 	var name=input.val();
 	if(name){input.removeClass("invalid").addClass("valid");}
@@ -406,11 +413,11 @@ function cardnumber4(inputtxt){ //6011000990139424
     } else {
         $("#cost").removeClass("valid").addClass("invalid");
     }
-    
+   
     if ( paymentIsGood &&
         mailcheck($("#mail").val()) &&
         $("#name").val() &&
-        $("#cost").val(price) > 0) {
+        $("#cost").val() > 0) {
         //console.log("yay");
     } else {
         //console.log("no");
@@ -418,8 +425,8 @@ function cardnumber4(inputtxt){ //6011000990139424
     }
 });
   
-  function validation(){
-  confirmButton.click(function(e) {
+  
+ /** confirmButton.click(function(e) {
     e.preventDefault();
 
     var cardValid = $.payform.validateCardNumber(cardNumber.val());
@@ -435,8 +442,9 @@ function cardnumber4(inputtxt){ //6011000990139424
  // Everything is correct. Add your form submission code here.
         alert("Everything is correct");
     }
+    console.log("confirmButton");
  });
-}
+ **/
 
 
 // must enter a message, this can't leave blank
